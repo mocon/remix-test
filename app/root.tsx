@@ -12,9 +12,10 @@ import {
 } from 'remix'
 import type { LinksFunction } from 'remix'
 
-import deleteMeRemixStyles from '~/styles/demos/remix.css'
 import globalStylesUrl from '~/styles/global.css'
 import darkStylesUrl from '~/styles/dark.css'
+import deleteMeRemixStyles from '~/styles/demos/remix.css'
+import tailwindUrl from '~/styles/tailwind.css'
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -33,6 +34,8 @@ export let links: LinksFunction = () => {
       media: '(prefers-color-scheme: dark)',
     },
     { rel: 'stylesheet', href: deleteMeRemixStyles },
+    { rel: 'stylesheet', href: tailwindUrl },
+    { rel: 'stylesheet', href: 'https://cdn.lost.show/fonts/karelia.css' },
   ]
 }
 
