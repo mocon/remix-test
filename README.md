@@ -1,4 +1,8 @@
-# Welcome to Remix!
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+
+# Remix Test
+
+Trying out a new Remix web application.
 
 - [Remix Docs](https://remix.run/docs)
 
