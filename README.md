@@ -8,8 +8,6 @@ Trying out a new Remix web application.
 
 ## Development
 
-From your terminal:
-
 ```sh
 yarn dev
 ```
@@ -18,7 +16,7 @@ This starts your app in development mode, rebuilding assets on file changes.
 
 ## Deployment
 
-First, build your app for production:
+First, build the app for production:
 
 ```sh
 yarn build
@@ -54,4 +52,11 @@ cd my-new-remix-app
 rm -rf app
 # copy your app over
 cp -R ../my-old-remix-app/app app
+```
+
+### Environment variables
+
+```
+GITHUB_API_BASE_URL=https://api.github.com
+SPACEX_API_BASE_URL=https://api.spacexdata.com/v3
 ```
