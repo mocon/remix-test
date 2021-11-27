@@ -49,7 +49,7 @@ export let loader: LoaderFunction = () => {
 // https://remix.run/api/conventions#meta
 export let meta: MetaFunction = () => {
   return {
-    title: 'Remix Starter',
+    title: 'Home Page',
     description: 'Welcome to remix!',
   }
 }
@@ -73,6 +73,14 @@ export default function Index() {
           <code>app/routes/demos</code> and <code>app/styles/demos</code> folders when you're ready
           to turn this into your next project.
         </p>
+        <Link to='/dashboard'>
+          <button
+            className='bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded'
+            type='button'
+          >
+            Go to Dashboard
+          </button>
+        </Link>
       </main>
       <aside>
         <h2>Demos In This App</h2>
