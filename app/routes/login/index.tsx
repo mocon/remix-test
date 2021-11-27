@@ -1,14 +1,11 @@
-import type { MetaFunction, LoaderFunction } from 'remix'
 import { useLoaderData, json, Link } from 'remix'
+import { ButtonPrimary } from '~/components'
+import type { MetaFunction, LoaderFunction } from 'remix'
 
 type LoginData = {
   resources: Array<{ name: string; url: string }>
 }
 
-// Loaders provide data to components and are only ever called on the server, so
-// you can connect to a database or run any server side code you want right next
-// to the component that renders it.
-// https://remix.run/api/conventions#loader
 export let loader: LoaderFunction = () => {
   let data: LoginData = {
     resources: [
@@ -26,12 +23,9 @@ export let loader: LoaderFunction = () => {
       },
     ],
   }
-
-  // https://remix.run/api/remix#json
   return json(data)
 }
 
-// https://remix.run/api/conventions#meta
 export let meta: MetaFunction = () => {
   return {
     title: 'Login Page',
@@ -39,7 +33,6 @@ export let meta: MetaFunction = () => {
   }
 }
 
-// https://remix.run/guides/routing#index-routes
 export default function Index() {
   let data = useLoaderData<LoginData>()
 
@@ -66,12 +59,7 @@ export default function Index() {
           <p className='text-red text-xs italic'>Please choose a password.</p>
         </div>
         <div className='flex items-center justify-between'>
-          <button
-            className='bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded'
-            type='button'
-          >
-            Sign In
-          </button>
+          <ButtonPrimary>Sign In</ButtonPrimary>
           <a
             className='inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker'
             href='#'
