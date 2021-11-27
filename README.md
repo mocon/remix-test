@@ -1,20 +1,22 @@
-# Welcome to Remix!
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/mocon/remix-test)
+
+# Remix Test
+
+Trying out a new Remix web application.
 
 - [Remix Docs](https://remix.run/docs)
 
 ## Development
 
-From your terminal:
+Start your app in development mode, rebuilding assets on file changes:
 
 ```sh
 yarn dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
-
 ## Deployment
 
-First, build your app for production:
+First, build the app for production:
 
 ```sh
 yarn build
@@ -26,7 +28,7 @@ Then run the app in production mode:
 yarn start
 ```
 
-Now you'll need to pick a host to deploy it to.
+Now pick a host to deploy it to.
 
 ### DIY
 
@@ -43,11 +45,21 @@ When you ran `npx create-remix@latest` there were a few choices for hosting. You
 
 ```sh
 cd ..
-# create a new project, and pick a pre-configured host
+
+# Create a new project, and pick a pre-configured host
 npx create-remix@latest
 cd my-new-remix-app
-# remove the new project's app (not the old one!)
+
+# Remove the new project's app (not the old one!)
 rm -rf app
-# copy your app over
+
+# Copy your app over
 cp -R ../my-old-remix-app/app app
+```
+
+### Environment variables
+
+```
+GITHUB_API_BASE_URL=https://api.github.com # REST
+SPACEX_API_BASE_URL=https://api.spacex.land/graphql # GraphQL
 ```

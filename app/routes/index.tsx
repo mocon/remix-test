@@ -1,16 +1,60 @@
 import type { MetaFunction, LoaderFunction } from 'remix'
 import { useLoaderData, json, Link } from 'remix'
+import { GraphQLClient, gql } from 'graphql-request'
+
+const headers = {
+  headers: {
+    'content-type': 'application/json'
+  }
+}
+
+type LaunchData = {
+  id: string
+  full_name: string
+  status: string
+  location: {
+    name: string
+    region: string
+    latitude: number
+    longitude: number
+  },
+  landing_type: string
+  attempted_landings: number
+  successful_landings: number
+  wikipedia: string
+  details: string
+}
 
 type IndexData = {
   resources: Array<{ name: string; url: string }>
   demos: Array<{ name: string; to: string }>
+  launches: LaunchData[]
 }
 
-// Loaders provide data to components and are only ever called on the server, so
-// you can connect to a database or run any server side code you want right next
-// to the component that renders it.
-// https://remix.run/api/conventions#loader
-export let loader: LoaderFunction = () => {
+export let loader: LoaderFunction = async () => {
+  const endpoint = process.env.SPACEX_API_URL!
+  const query = gql`
+  {
+    launches {
+      id
+      launch_date_utc
+      launch_site {
+        site_name
+      }
+      launch_success
+      mission_name
+      rocket {
+        rocket_name
+      }
+      ships {
+        name
+      }
+    }
+  }  
+  `
+  const client = new GraphQLClient(endpoint, headers)
+  let launches = await client.request(query, {})
+
   let data: IndexData = {
     resources: [
       {
@@ -40,13 +84,12 @@ export let loader: LoaderFunction = () => {
         name: 'URL Params and Error Boundaries',
       },
     ],
+    launches,
   }
 
-  // https://remix.run/api/remix#json
   return json(data)
 }
 
-// https://remix.run/api/conventions#meta
 export let meta: MetaFunction = () => {
   return {
     title: 'Home Page',
@@ -54,7 +97,6 @@ export let meta: MetaFunction = () => {
   }
 }
 
-// https://remix.run/guides/routing#index-routes
 export default function Index() {
   let data = useLoaderData<IndexData>()
 
@@ -69,9 +111,7 @@ export default function Index() {
           resources to get you up-and-running quickly.
         </p>
         <p>
-          Check out all the demos in this starter, and then just delete the{' '}
-          <code>app/routes/demos</code> and <code>app/styles/demos</code> folders when you're ready
-          to turn this into your next project.
+          Launches: {JSON.stringify(data.launches)}
         </p>
         <Link to='/dashboard'>
           <button
