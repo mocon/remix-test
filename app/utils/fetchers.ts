@@ -1,14 +1,3 @@
-import { GraphQLClient, gql } from 'graphql-request'
-
-// SpaceX GraphQL API
-const spacexEndpoint = process.env.SPACEX_API_URL!
-const spacexHeaders = {
-  headers: {
-    'content-type': 'application/json',
-  },
-}
-const spacexGraphQl = new GraphQLClient(spacexEndpoint, spacexHeaders)
-
 // GitHub REST API
 const githubBaseUrl = process.env.GITHUB_API_BASE_URL!
 const githubHeaders = {
@@ -21,4 +10,4 @@ const fetchGithubApi = async (path: string) => {
   return data.json()
 }
 
-export { spacexGraphQl, gql, fetchGithubApi }
+export { fetchGithubApi }

@@ -11,6 +11,7 @@ import {
   useLocation,
 } from 'remix'
 import type { LinksFunction } from 'remix'
+import ApolloContext from './context/apollo'
 
 import globalStylesUrl from '~/styles/global.css'
 import darkStylesUrl from '~/styles/dark.css'
@@ -55,6 +56,8 @@ export default function App() {
 }
 
 function Document({ children, title }: { children: React.ReactNode; title?: string }) {
+  const initialState = React.useContext(ApolloContext)
+
   return (
     <html lang='en'>
       <head>
@@ -70,6 +73,15 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__INITIAL_STATE__=${JSON.stringify(initialState).replace(
+              /</g,
+              '\\u003c',
+            )}`,
+          }}
+        />
       </body>
     </html>
   )
