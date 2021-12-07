@@ -12,20 +12,13 @@ import {
 } from 'remix'
 import type { LinksFunction } from 'remix'
 import ApolloContext from './context/apollo'
+import { initFirebase } from './context/firebase.server'
 
 import globalStylesUrl from '~/styles/global.css'
 import darkStylesUrl from '~/styles/dark.css'
 import deleteMeRemixStyles from '~/styles/demos/remix.css'
 import tailwindUrl from '~/styles/tailwind.css'
 
-/**
- * The `links` export is a function that returns an array of objects that map to
- * the attributes for an HTML `<link>` element. These will load `<link>` tags on
- * every route in the app, but individual routes can include their own links
- * that are automatically unloaded when a user navigates away from the route.
- *
- * https://remix.run/api/app#links
- */
 export let links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: globalStylesUrl },
@@ -57,6 +50,10 @@ export default function App() {
 
 function Document({ children, title }: { children: React.ReactNode; title?: string }) {
   const initialState = React.useContext(ApolloContext)
+
+  React.useEffect(() => {
+    initFirebase()
+  }, [])
 
   return (
     <html lang='en'>

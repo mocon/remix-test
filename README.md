@@ -60,6 +60,7 @@ cp -R ../my-old-remix-app/app app
 ### Environment variables
 
 ```
+FIREBASE_API_KEY=xxxx
 GITHUB_API_BASE_URL=https://api.github.com # REST
 SPACEX_API_BASE_URL=https://api.spacex.land/graphql # GraphQL
 ```
