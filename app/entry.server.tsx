@@ -3,7 +3,6 @@ import { RemixServer } from 'remix'
 import { ApolloProvider } from '@apollo/client'
 import { getDataFromTree } from '@apollo/client/react/ssr'
 import ApolloContext, { initApollo } from './context/apollo'
-import { FirebaseAuthProvider } from './context/firebase.server'
 import type { EntryContext } from 'remix'
 
 export default function handleRequest(
@@ -15,11 +14,9 @@ export default function handleRequest(
   const client = initApollo()
 
   const App = (
-    <FirebaseAuthProvider>
-      <ApolloProvider client={client}>
-        <RemixServer context={remixContext} url={request.url} />
-      </ApolloProvider>
-    </FirebaseAuthProvider>
+    <ApolloProvider client={client}>
+      <RemixServer context={remixContext} url={request.url} />
+    </ApolloProvider>
   )
 
   return getDataFromTree(App).then(() => {

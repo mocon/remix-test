@@ -6,35 +6,24 @@ export let links: LinksFunction = () => [{ rel: 'stylesheet', href: loginStyles 
 
 export let meta: MetaFunction = () => {
   return {
-    title: 'Login Page',
+    title: 'Enter SMS Code',
     description: 'Welcome to remix!',
   }
 }
 
-export default function Login() {
+export default function Verify() {
   return (
-    <form method='post' action='/login/send-code'>
+    <form method='post' action='/login/verify-code'>
       <div className='shadow-md rounded px-8 pt-6 pb-8 my-6 flex flex-col'>
         <div className='mb-4'>
-          <label className='block text-sm font-bold mb-2'>Country Code</label>
+          <label className='block text-sm font-bold mb-2'>Verification Code</label>
           <input
             className='shadow appearance-none border rounded w-full py-2 px-3 text-black mb-2'
-            name='countryCode'
+            name='verificationCode'
             type='text'
-            defaultValue='+1'
+            placeholder='123456'
           />
-          <p className='text-red text-xs italic'>Enter your country code</p>
-        </div>
-        <div className='mb-6'>
-          <label className='block text-sm font-bold mb-2'>Phone Number</label>
-          <input
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-black mb-2'
-            name='phoneNumber'
-            type='tel'
-            placeholder='2135551234'
-            autoFocus
-          />
-          <p className='text-red text-xs italic'>Enter your phone number, including area code</p>
+          <p className='text-red text-xs italic'>Enter your 6-digit code</p>
         </div>
         <div className='flex items-center justify-between'>
           <ButtonPrimary type='submit'>Send code</ButtonPrimary>

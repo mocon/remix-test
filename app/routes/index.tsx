@@ -1,37 +1,18 @@
 import { useLoaderData, json, Link } from 'remix'
-import { useQuery, gql } from '@apollo/client'
-import { fetchGithubApi } from '~/utils/fetchers'
+import { useQuery } from '@apollo/client'
+import { githubApi } from '~/utils/fetchers'
 import { ButtonPrimary } from '~/components'
+import { LAUNCHES } from '~/graphql/queries/launches'
 import type { MetaFunction, LoaderFunction } from 'remix'
-
-const LAUNCHES_QUERY = gql`
-  {
-    launches(limit: 5) {
-      id
-      launch_date_utc
-      launch_site {
-        site_name
-      }
-      launch_success
-      mission_name
-      rocket {
-        rocket_name
-      }
-      ships {
-        name
-      }
-    }
-  }
-`
 
 type IndexData = {
   github: any
 }
 
 export let loader: LoaderFunction = async () => {
-  let github = await fetchGithubApi('/users/mocon')
-  let data: IndexData = { github }
-  return json(data)
+  let { data } = await githubApi.get('/users/mocon')
+  let loaderData: IndexData = { github: data }
+  return json(loaderData)
 }
 
 export let meta: MetaFunction = () => {
@@ -43,7 +24,7 @@ export let meta: MetaFunction = () => {
 
 export default function Index() {
   let loaderData = useLoaderData<IndexData>()
-  const { data } = useQuery(LAUNCHES_QUERY, { variables: {} })
+  let { data } = useQuery(LAUNCHES, { variables: {} })
 
   return (
     <main>

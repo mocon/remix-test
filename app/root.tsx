@@ -12,7 +12,6 @@ import {
 } from 'remix'
 import type { LinksFunction } from 'remix'
 import ApolloContext from './context/apollo'
-import { initFirebase } from './context/firebase.server'
 
 import globalStylesUrl from '~/styles/global.css'
 import darkStylesUrl from '~/styles/dark.css'
@@ -21,6 +20,7 @@ import tailwindUrl from '~/styles/tailwind.css'
 
 export let links: LinksFunction = () => {
   return [
+    { rel: 'shortcut icon', href: '/favicon.ico' },
     { rel: 'stylesheet', href: globalStylesUrl },
     {
       rel: 'stylesheet',
@@ -50,10 +50,6 @@ export default function App() {
 
 function Document({ children, title }: { children: React.ReactNode; title?: string }) {
   const initialState = React.useContext(ApolloContext)
-
-  React.useEffect(() => {
-    initFirebase()
-  }, [])
 
   return (
     <html lang='en'>
