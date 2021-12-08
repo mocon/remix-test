@@ -1,11 +1,19 @@
 import type { MetaFunction, LoaderFunction } from 'remix'
-import { useLoaderData, json, Link } from 'remix'
+import { useLoaderData, json } from 'remix'
+import { getSession } from '~/sessions'
 
 type DashboardData = {
   resources: Array<{ name: string; url: string }>
 }
 
-export let loader: LoaderFunction = () => {
+export let loader: LoaderFunction = async ({ request }) => {
+  // Access user information and token from session after login
+  const session = await getSession(request.headers.get('Cookie'))
+
+  if (session.has('user_id')) {
+    console.log('🏀 session.get("user_id") =>', session.get('user_id'))
+  }
+
   let data: DashboardData = {
     resources: [
       {

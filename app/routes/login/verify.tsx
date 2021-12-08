@@ -22,6 +22,7 @@ export default function Verify() {
             name='verificationCode'
             type='text'
             placeholder='123456'
+            autoFocus
           />
           <p className='text-red text-xs italic'>Enter your 6-digit code</p>
         </div>

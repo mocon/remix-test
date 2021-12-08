@@ -63,6 +63,7 @@ cp -R ../my-old-remix-app/app app
 AUTH0_CLIENT_ID=xxxx
 AUTH0_CLIENT_SECRET=xxxx
 AUTH0_DOMAIN=xxxx
+AUTH0_AUDIENCE=xxxx
 GITHUB_API_BASE_URL=https://api.github.com # REST
 SPACEX_API_BASE_URL=https://api.spacex.land/graphql # GraphQL
 ```
